@@ -12,13 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('profiles');
 });
 
 Auth::routes();
 
-Route::get('/home', 'ProfileController@index')->name('home');
+Route::get('/home', 'ProfileController@create')->name('home');
 
 Route::resource('profiles','profileController')->only([
-    'index', 'create', 'store'
+    'index', 'create', 'store', 'edit', 'show'
 ]);

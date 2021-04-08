@@ -14,7 +14,10 @@ class CreateProfilesTable extends Migration
     public function up()
     {
         Schema::create('profiles', function (Blueprint $table) {
+            
             $table->bigIncrements('id');
+            $table->string('nickname');
+            $table->bigInteger('user_id');
             $table->boolean('gender');
             $table->bigInteger('height');
             $table->bigInteger('age');
