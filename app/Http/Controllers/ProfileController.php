@@ -23,8 +23,13 @@ class ProfileController extends Controller
         
         $user = Auth::user();
         $profile = $user->profile;
+        $profiles = DB::table('profiles')
+        ->whereNotIn('id', [$profile->id])
+        ->select('nickname', 'age','comment','work', 'height', 'age', 'interest', 'gender','id')
+        ->get();
+        // dd($profiles[0]);
         // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
-        return view('profiles.index',compact('profile'));
+        return view('profiles.index',compact('profile','profiles'));
     }
 
 
