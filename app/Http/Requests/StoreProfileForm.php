@@ -24,7 +24,14 @@ class StoreProfileForm extends FormRequest
     public function rules()
     {
         return [
-            'nickname' => 'required|max:3'
+            'nickname' => 'required|max:20|string',
+            'height' => 'nullable|numeric|max:250|min:50',
+            'gender' => 'required',
+            'comment ' =>'nullable|max:500',
+            'work' => 'nullable|max:30',
+            'interest' => 'nullable|max:30',
+            'age' => 'required|numeric|min:18|max:120'
+
         ];
     }
 }

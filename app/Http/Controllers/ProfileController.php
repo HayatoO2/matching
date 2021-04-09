@@ -73,7 +73,7 @@ class ProfileController extends Controller
         return view('profiles.edit', compact('profile'));
     }
 
-    public function update(Request $request, $id){
+    public function update(StoreProfileForm $request, $id){
 
         // dd($request->method());
         // dd($id);

@@ -21,7 +21,7 @@
                     @csrf
 
                          ニックネーム：
-                          <input name="nickname" type="text">
+                          <input name="nickname" type="text" value=" {{$profile->nickname}} ">
                           <br>
 
                           <input name="gender" type="radio" @if ($profile->gender === 0) checked @endif value="0" >男性
