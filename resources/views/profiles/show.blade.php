@@ -34,6 +34,9 @@
                     自己紹介：{{$profile->comment}}
                     <br>
                     <a href="{{ route('profiles.edit', ['profile' => $profile-> id]) }}" class="btn btn-primary">編集する</a>
+                    <a href="{{ route('profiles.index')}}" class="btn btn-primary">戻る</a>
+                    
+
                     
                 </div>
             </div>

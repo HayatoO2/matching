@@ -13,7 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-<a href="{{ route('profiles.edit', ['profile' => $profile->id]) }}" class="btn btn-primary" >情報の登録</a>
+
 
 <a href="{{ route('profiles.show', ['profile' => $profile->id]) }}" class="btn btn-primary" >マイページ</a>
 

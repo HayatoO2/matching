@@ -18,6 +18,9 @@
                     @endif
                     <form method="POST" action="{{ route('profiles.store') }}">
                     @csrf
+                    @error('nickname')
+                    {{$message}}
+                    @enderror
                     ニックネーム：
                         <input name="nickname" type=text placeholder="ニックネーム">
                         <br>

@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,5 +20,5 @@ Auth::routes();
 Route::get('/home', 'ProfileController@create')->name('home');
 
 Route::resource('profiles','profileController')->only([
-    'index', 'create', 'store', 'edit', 'show'
+    'index', 'create', 'store', 'edit', 'show', 'update'
 ]);

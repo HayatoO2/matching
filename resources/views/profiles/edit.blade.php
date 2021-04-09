@@ -16,8 +16,13 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('profiles.store') }}">
+                    <form method="POST" action="{{ route('profiles.update',['profile' => $profile->id]) }}">
+                    @method('PATCH')
                     @csrf
+
+                         ニックネーム：
+                          <input name="nickname" type="text">
+                          <br>
 
                           <input name="gender" type="radio" @if ($profile->gender === 0) checked @endif value="0" >男性
                           <input name="gender" type="radio" value="1" @if ($profile->gender === 1) checked @endif>女性

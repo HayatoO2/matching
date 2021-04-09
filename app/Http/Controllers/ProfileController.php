@@ -7,13 +7,20 @@ use Auth;
 use App\User;
 use App\Models\profile;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreProfileForm;
 
 class ProfileController extends Controller
 {
     
 
     public function index(){
-        // $users =  User::all();
+
+
+        if (Auth::user() === null){
+        return redirect('login');
+        }
+
+        
         $user = Auth::user();
         $profile = DB::table('profiles')->where('user_id', $user->id)->first();
         return view('profiles.index',compact('profile'));
@@ -23,12 +30,17 @@ class ProfileController extends Controller
 
     public function create(){
         $user = Auth::user();
+
+        if(!empty(DB::table('profiles')->where('user_id', $user->id)->first())){
+            return redirect('profiles');
+        }
+
         return view('profiles.create',compact('user'));
     }
 
     
 
-    public function store(Request $request){
+    public function store(StoreProfileForm $request){
 
         $profile = new Profile;
 
@@ -61,7 +73,25 @@ class ProfileController extends Controller
         return view('profiles.edit', compact('profile'));
     }
 
+    public function update(Request $request, $id){
 
+        // dd($request->method());
+        // dd($id);
+
+        $profile = Profile::find($id);
+        $profile->nickname = $request->input('nickname');
+        $profile->gender = $request->input('gender');
+        $profile->height = $request->input('height');
+        $profile->age = $request->input('age');
+        $profile->work = $request->input('work');
+        $profile->comment = $request->input('comment');
+        $profile->interest = $request->input('interest');
+        $profile->user_id = Auth::id();
+        // dd($profile);
+        $profile->save();
+        return redirect("profiles/{$profile->id}");
+
+    }
 
 
 
