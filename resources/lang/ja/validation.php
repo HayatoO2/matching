@@ -117,7 +117,13 @@ return [
     */
 
     'attributes' => [
-        'nickname' => 'ニックネーム'
+        'nickname' => 'ニックネーム',
+        'gender' => '性別選択',
+        'height' => '身長',
+        'age' => '年齢',
+        "work" => '職業',
+        "interest" => '趣味',
+        'comment' => '自己紹介'
     ],
 
 ];

@@ -19,7 +19,15 @@
                     <form method="POST" action="{{ route('profiles.update',['profile' => $profile->id]) }}">
                     @method('PATCH')
                     @csrf
-
+                    @if ($errors->any())
+                            <div class="alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                          ニックネーム：
                           <input name="nickname" type="text" value=" {{$profile->nickname}} ">
                           <br>
