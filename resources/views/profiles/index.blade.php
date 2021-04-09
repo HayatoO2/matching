@@ -15,9 +15,11 @@
                     @endif
 
 
-
+<?php if (!empty($profile)): ?>
 <a href="{{ route('profiles.show', ['profile' => $profile->id]) }}" class="btn btn-primary" >マイページ</a>
-
+<?php else: ?>
+    <a href="{{ route('profiles.create')}}" class="btn btn-primary" >詳細登録ページ</a>
+<?php endif ?>
 
 
 

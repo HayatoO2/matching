@@ -22,8 +22,8 @@ class ProfileController extends Controller
 
         
         $user = Auth::user();
-        
-        $profile = DB::table('profiles')->where('user_id', $user->id)->first();
+        $profile = $user->profile;
+        // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
         return view('profiles.index',compact('profile'));
     }
 
