@@ -15,7 +15,9 @@
                     @endif
 
 
+
 <a href="{{ route('profiles.show', ['profile' => $profile->id]) }}" class="btn btn-primary" >マイページ</a>
+
 
 
 

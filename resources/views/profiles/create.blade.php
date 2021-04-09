@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+<!-- <?php session_start(); ?>  -->
+
 
 @section('content')
 <div class="container">
@@ -27,27 +29,32 @@
                                 </ul>
                             </div>
                         @endif
+                        
                     ニックネーム：
-                        <input name="nickname" type=text placeholder="ニックネーム">
+                        <input name="nickname" type=text placeholder="ニックネーム" value=" {{old('nickname')}} ">
                         <br>
-                          <input name="gender" type="radio" value="0">男性
-                          <input name="gender" type="radio" value="1">女性
+                          <input name="gender" type="radio" value="0"
+                           <?php if (old('gender')== 0) echo 'checked'; ?> 
+                           >男性
+                          <input name="gender" type="radio" value="1"
+                          <?php if (old('gender')== 1) echo 'checked'; ?>
+                          >女性
                           <br>
 
-                          身長：<input type="text" name='height' placeholder='165'>
+                          身長：<input type="text" name='height' placeholder='165' value=" {{old('height')}}">
                           <br>
 
-                          年齢：<input type="text" name='age' placeholder='30'>
+                          年齢：<input type="text" name='age' placeholder='30' value=" {{old('age')}}">
                           <br>
 
-                          職業：<input type="text" name= 'work'>
+                          職業：<input type="text" name= 'work' value=" {{old('work')}}">
                           <br>
 
-                          趣味：<input type="text" name="interest">
+                          趣味：<input type="text" name="interest" value=" {{old('interest')}}">
                           <br>
 
                           自己紹介<br>
-                          <textarea name="comment" rows="8" cols="40">
+                          <textarea name="comment" rows="8" cols="40" value=" {{old('comment')}}">
                           </textarea>
                           <br>
 
