@@ -22,3 +22,4 @@ Route::get('/home', 'ProfileController@create')->name('home');
 Route::resource('profiles','profileController')->only([
     'index', 'create', 'store', 'edit', 'show', 'update'
 ]);
+Route::get('search','profileController@search')->name('profiles.search');

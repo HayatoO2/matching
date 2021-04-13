@@ -26,7 +26,7 @@ class ProfileController extends Controller
         $profiles = DB::table('profiles')
         ->whereNotIn('id', [$profile->id])
         ->select('nickname', 'age','comment','work', 'height', 'age', 'interest', 'gender','id')
-        ->get();
+        ->paginate(40);
         // dd($profiles[0]);
         // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
         return view('profiles.index',compact('profile','profiles'));
@@ -96,7 +96,53 @@ class ProfileController extends Controller
         // dd($profile);
         $profile->save();
         return redirect("profiles/{$profile->id}");
+        
+    }
+    
+    public function search(Request $request){
+        $profile_search = new Profile;
+        // dd($request);
+        
+        $profile_search->age_top = $request->input('age-top');
+        $profile_search->age_bottom = $request->input('age-bottom');
+        $profile_search->height_top = $request->input('height-top');
+        $profile_search->height_bottom = $request->input('height-bottom');
+        $profile_search->key_nickname = $request->input('key-nickname');
+        $profile_search->key_work = $request->input('key-work');
+        $profile_search->key_interest = $request->input('key-interest');
+       
+        
+        if(empty($profile_search->age_top)){
+            $profile_search->age_top = 120;
+        }
+        if(empty($profile_search->age_bottom)){
+            $profile_search->age_bottom = 18;
+        }
+        if(empty($profile_search->height_top)){
+            $profile_search->height_top = 250;
+        }
+        if(empty($profile_search->height_bottom)){
+            $profile_search->height_bottom = 50;
+        }
+        
 
+        $user = Auth::user();
+        $profile = $user->profile;
+        // dd('%' . $profile_search->search . '%');
+
+        $profiles = DB::table('profiles')
+                    ->whereNotIn('id', [$profile->id])
+                    ->select('nickname', 'age','comment','work', 'height', 'age', 'interest', 'gender','id')
+                    ->whereBetween('age', [$profile_search->age_bottom, $profile_search->age_top])
+                    ->whereBetween('height', [$profile_search->height_bottom, $profile_search->height_top])
+                    ->where('nickname', 'like', '%' . $profile_search->key_nickname . '%')
+                    ->where('work', 'like', '%' . $profile_search->key_work . '%')
+                    ->where('interest', 'like', '%' . $profile_search->key_interest . '%')
+                    ->paginate(40);
+
+                    // dd($profiles);
+
+                    return view('profiles.index',compact('profile','profiles'));
     }
 
 
