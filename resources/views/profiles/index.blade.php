@@ -11,7 +11,18 @@
                     <?php else: ?>
                         <a href="{{ route('profiles.create')}}" class="btn btn-primary " >詳細登録ページ</a>
                     <?php endif ?>
-                    <div class="btn btn-success" id="search-btn">詳細検索</div>
+                    <div class="btn
+                     btn-success" id="search-btn">詳細検索</div>
+                     <div class="dropdown d-inline-block">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    表示する性別を絞る
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <li><a class="dropdown-item" href="#">全員</a></li>
+    <li><a class="dropdown-item" href="#">男性のみ</a></li>
+    <li><a class="dropdown-item" href="#">女性のみ</a></li>
+  </ul>
+</div>
                 </div>
 
                 <div class="card-body">
@@ -48,7 +59,10 @@
                         <div class="row m-auto justify-content-center ">
                             @foreach ($profiles as $index => $profile)
                             
-                            <div class="card card-member m-1 col-5 col-md-3 col-lg-2" style="width: 18rem;">
+                            <div class="card card-member m-1 col-5 col-md-3 col-lg-2 
+                            <?php if ($profile->gender === 0) echo 'card-man'; ?>
+                            <?php if ($profile->gender === 1) echo 'card-woman'; ?>
+                            " style="width: 18rem;">
                                 <div class="card-body d-relative">
                                     <h5 class="card-title">{{$profile->nickname}}</h5>
                                     <a href="{{ route('profiles.show',['profile' => $profile->id]) }}" class="card-link my-2 btn btn-sm btn-primary d-block d-absolute">詳細</a>

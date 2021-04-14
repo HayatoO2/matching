@@ -29,7 +29,9 @@ class ProfileController extends Controller
         ->paginate(40);
         // dd($profiles[0]);
         // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
+        // dd($profiles->where('gender',1));
         return view('profiles.index',compact('profile','profiles'));
+
     }
 
 

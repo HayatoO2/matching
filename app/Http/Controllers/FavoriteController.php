@@ -55,17 +55,24 @@ class FavoriteController extends Controller
 
     public function store(Request $request){
 
-        $favorites = \DB::table('favorites')->get(); 
-        // dd($favorites);
+        // $favorites = \DB::table('favorites')->get(); 
+        // dd($request->input('id'));
         $favorite = new Favorite();
         $favorite->to_fav = $request->input('id');
         $favorite->from_fav = Auth::id();
         $favorite->match_flag = true;
 
-        if (empty($favorites
-                  ->where('to_fav', $favorite->to_fav)
-                  ->where('from_fav', $favorite->from_fav)))
+        $data = \DB::table('favorites')
+                ->where('to_fav', $favorite->to_fav)
+                ->where('from_fav', $favorite->from_fav)
+                ->get()
+                ->first();
+
+                // dd($data);
+        
+        if (is_null($data)){
         $favorite->save();
+    }
 
         return redirect('favorites');
         
