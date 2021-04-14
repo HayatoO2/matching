@@ -36,6 +36,12 @@
                     <br>
                     <a href="{{ route('profiles.edit', ['profile' => $profile-> id]) }}" class="btn btn-primary">編集する</a>
                     <a href="{{ route('profiles.index')}}" class="btn btn-primary">戻る</a>
+                    <form action="{{ route('favorites.store') }}" method="POST">
+                    @csrf
+                    <input type="submit" value="お気に入りに追加" class="btn btn-warning">
+                    <input type='hidden' value=" {{$profile->user_id}} " name='id'>
+                    </form>
+                    
                     
 
                     

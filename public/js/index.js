@@ -1,9 +1,10 @@
-window.addEventListener('load', post);
+window.addEventListener('load', search);
 
-function post(){
+function search(){
   const search = document.getElementById('search-btn');
   const searchForm = document.getElementById('search-form');
   search.addEventListener('click',function(){
     searchForm.classList.toggle('d-none');
   });
 }
+

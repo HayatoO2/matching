@@ -23,3 +23,5 @@ Route::resource('profiles','profileController')->only([
     'index', 'create', 'store', 'edit', 'show', 'update'
 ]);
 Route::get('search','profileController@search')->name('profiles.search');
+
+Route::resource('favorites','favoriteController')->only(['store', 'index']);

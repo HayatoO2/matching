@@ -60,6 +60,7 @@ class ProfileController extends Controller
         $profile->user_id = Auth::id();
         // dd($profile);
         $profile->save();
+        
         return redirect('profiles');
 
     }
