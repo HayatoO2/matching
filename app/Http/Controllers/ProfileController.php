@@ -60,16 +60,17 @@ class ProfileController extends Controller
         $profile->user_id = Auth::id();
         // dd($profile);
         $profile->save();
-        
+
         return redirect('profiles');
 
     }
 
     public function show($id){
         
+        $user = Auth::user();
         $profile = Profile::find($id);
         // dd($profile);
-        return view('profiles.show',compact('profile'));
+        return view('profiles.show',compact('profile', 'user'));
 
     }
 
