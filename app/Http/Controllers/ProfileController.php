@@ -20,17 +20,39 @@ class ProfileController extends Controller
         if (Auth::user() === null){
         return redirect('login');
         }
-
+        
         
         $user = Auth::user();
         $profile = $user->profile;
         $profiles = DB::table('profiles')
         ->whereNotIn('id', [$profile->id])
-        ->select('nickname', 'age','comment','work', 'height', 'age', 'interest', 'gender','id')
         ->paginate(40);
-        // dd($profiles[0]);
-        // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
-        // dd($profiles->where('gender',1));
+        
+        if(isset($_GET['gender'])){
+            if($_GET['gender']==='man'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', 0)
+                ->paginate(40);
+            }
+            if($_GET['gender']==='woman'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', 1)
+                ->paginate(40);
+            }
+            if($_GET['gender']==='all'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->paginate(40);
+            }
+        }else{
+            $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', !$user->profile->gender)
+                ->paginate(40);
+            }
+
         return view('profiles.index',compact('profile','profiles'));
 
     }

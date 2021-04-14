@@ -18,11 +18,28 @@
     表示する性別を絞る
   </button>
   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" href="#">全員</a></li>
-    <li><a class="dropdown-item" href="#">男性のみ</a></li>
-    <li><a class="dropdown-item" href="#">女性のみ</a></li>
-  </ul>
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="all">
+                <input type='submit' class="dropdown-item" value="全員">
+                </form>
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="man">
+                <input type='submit' class="dropdown-item" value="男性のみ">
+                </form>
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="woman">
+                <input type='submit' class="dropdown-item" value="女性のみ">
+                </form>
+                 </ul>
 </div>
+<a href=" {{ route('favorites.index') }} " class="btn btn-warning">お気に入り</a>
+<!-- <div class="btn btn-warning">お気に入り</div> -->
                 </div>
 
                 <div class="card-body">
