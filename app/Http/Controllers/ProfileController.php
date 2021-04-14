@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Models\profile;
+use App\Models\favorite;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProfileForm;
 
@@ -72,7 +73,11 @@ class ProfileController extends Controller
         $user = Auth::user();
         $profile = Profile::find($id);
         // dd($profile);
-        return view('profiles.show',compact('profile', 'user'));
+        $favorites = DB::table('favorites')
+                    ->get();
+
+        // dd($favorites->where('id',1));
+        return view('profiles.show',compact('profile', 'user','favorites'));
 
     }
 
