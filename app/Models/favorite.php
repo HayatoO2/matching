@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class favorite extends Model
 {
-    public function store(Request $request){
-        dd($request);
+    public function favorite()
+    {
+        return $this->belongsTo('App\Models\Profile');
     }
 }

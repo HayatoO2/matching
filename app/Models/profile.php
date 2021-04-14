@@ -10,4 +10,8 @@ class profile extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function favorite()
+    {
+        return $this->hasMany('App\Models\Favorite');
+    }
 }
