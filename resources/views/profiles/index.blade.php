@@ -75,7 +75,6 @@
                     </div>
                         <div class="row m-auto justify-content-center ">
                             @foreach ($profiles as $index => $profile)
-                            
                             <div class="card card-member m-1 col-5 col-md-3 col-lg-2 
                             <?php if ($profile->gender === 0) echo 'card-man'; ?>
                             <?php if ($profile->gender === 1) echo 'card-woman'; ?>
@@ -100,10 +99,10 @@
                     
 @endforeach
 
-{{$profiles->links()}}
-                        </div>
+</div>
 
-                     </div>
+</div>
+{{$profiles->links()}}
                 </div>
             </div>
         </div>

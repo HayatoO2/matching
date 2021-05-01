@@ -72,6 +72,7 @@
       <td> {{$profile->interest}} </td>
       <td> {{$profile->work}} </td>
       <td><a class="btn btn-primary" href=" {{ route('profiles.show', ['profile' => $profile->id])  }} " role="button">Link</a></td>
+      <td> <a class="btn btn-success" href="  {{ route('message.create', ['profile' => $profile->id]) }}">メッセージを送る</a> </td>
     </tr>
     @endforeach
   </tbody>

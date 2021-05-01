@@ -25,3 +25,5 @@ Route::resource('profiles','profileController')->only([
 Route::get('search','profileController@search')->name('profiles.search');
 
 Route::resource('favorites','favoriteController')->only(['store', 'index']);
+
+Route::resource('message', 'messageController')->only('create', 'store');
