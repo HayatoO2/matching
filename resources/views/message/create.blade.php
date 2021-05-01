@@ -7,13 +7,21 @@
 @foreach($messages as $message)
 
 <?php if ($message->to_fav === $profile->id):  ?>
-<div> {{$user->profile->nickname}} </div>
-<?php endif ?>
-<?php if ($message->from_fav === $profile->id):  ?>
+  <div class="message-right">
+    <div> {{$user->profile->nickname}} </div>
+    <div> {{$message->created_at}}</div>
+    <div class="arrow_box"> {{$message->message}} </div>
+  </div>
+  <?php endif ?>
+  
+  <?php if ($message->from_fav === $profile->id):  ?>
+    <div class="message-left">
 <div> {{$profile->nickname}} </div>
-<?php endif ?>
 <div> {{$message->created_at}}</div>
-<div class="arrow_box"> {{$message->message}} </div>
+<div class="arrow_box2"> {{$message->message}} </div>
+  </div>
+<?php endif ?>
+
 
 @endforeach
 </div>

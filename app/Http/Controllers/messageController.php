@@ -20,10 +20,11 @@ class messageController extends Controller
         $user = Auth::user();
         $messages = DB::table('messages')
                     ->where("to_fav", $profile->id)
+                    ->orWhere("to_fav",$user->profile->id)
                     ->where('from_fav', $user->profile->id)
+                    ->orWhere('from_fav', $profile->id)
                     ->orderByRaw('updated_at - created_at DESC')
                     ->get();
-
         return view('message.create', compact('profile', 'messages','user'));
     }
     
