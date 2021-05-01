@@ -36,6 +36,31 @@
                     <br>
                     <a href="{{ route('profiles.edit', ['profile' => $profile-> id]) }}" class="btn btn-primary">編集する</a>
                     <a href="{{ route('profiles.index')}}" class="btn btn-primary">戻る</a>
+                    <?php  if($user->profile->gender != $profile->gender) : ?>
+                    
+                        <?php $data = $favorites->where('to_fav', $profile->user_id)
+                                        ->where('from_fav', $user->id)
+                                        ->where('match_flag', 1)
+                                        ->first();
+                                        ?>
+
+                        @if(empty($data))
+                    <form action="{{ route('favorites.store') }}" method="POST">
+                    @csrf
+                    <input type="submit" value="お気に入りに追加" class="btn btn-warning">
+                    <input type='hidden' value=" {{$profile->user_id}} " name='id'>
+                    </form>
+                    @else
+                    <form action="{{ route('favorites.store') }}" method="POST">
+                    @csrf
+                    <input type="submit" value="お気に入り解除" class="btn btn-secondary">
+                    <input type='hidden' value=" {{$profile->user_id}} " name='id'>
+                    </form>
+                    @endif
+
+
+                    <?php endif ; ?>
+                    
                     
 
                     

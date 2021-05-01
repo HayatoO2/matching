@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Models\profile;
+use App\Models\favorite;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProfileForm;
 
@@ -19,17 +20,41 @@ class ProfileController extends Controller
         if (Auth::user() === null){
         return redirect('login');
         }
-
+        
         
         $user = Auth::user();
         $profile = $user->profile;
         $profiles = DB::table('profiles')
         ->whereNotIn('id', [$profile->id])
-        ->select('nickname', 'age','comment','work', 'height', 'age', 'interest', 'gender','id')
         ->paginate(40);
-        // dd($profiles[0]);
-        // $profile = DB::table('profiles')->where('user_id', $user->id)->first();
+        
+        if(isset($_GET['gender'])){
+            if($_GET['gender']==='man'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', 0)
+                ->paginate(40);
+            }
+            if($_GET['gender']==='woman'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', 1)
+                ->paginate(40);
+            }
+            if($_GET['gender']==='all'){
+                $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->paginate(40);
+            }
+        }else{
+            $profiles = DB::table('profiles')
+                ->whereNotIn('id', [$profile->id])
+                ->where('gender', !$user->profile->gender)
+                ->paginate(40);
+            }
+
         return view('profiles.index',compact('profile','profiles'));
+
     }
 
 
@@ -60,15 +85,21 @@ class ProfileController extends Controller
         $profile->user_id = Auth::id();
         // dd($profile);
         $profile->save();
+
         return redirect('profiles');
 
     }
 
     public function show($id){
         
+        $user = Auth::user();
         $profile = Profile::find($id);
         // dd($profile);
-        return view('profiles.show',compact('profile'));
+        $favorites = DB::table('favorites')
+                    ->get();
+
+        // dd($favorites->where('id',1));
+        return view('profiles.show',compact('profile', 'user','favorites'));
 
     }
 

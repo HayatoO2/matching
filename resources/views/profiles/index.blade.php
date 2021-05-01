@@ -11,7 +11,35 @@
                     <?php else: ?>
                         <a href="{{ route('profiles.create')}}" class="btn btn-primary " >詳細登録ページ</a>
                     <?php endif ?>
-                    <div class="btn btn-success" id="search-btn">詳細検索</div>
+                    <div class="btn
+                     btn-success" id="search-btn">詳細検索</div>
+                     <div class="dropdown d-inline-block">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    表示する性別を絞る
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="all">
+                <input type='submit' class="dropdown-item" value="全員">
+                </form>
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="man">
+                <input type='submit' class="dropdown-item" value="男性のみ">
+                </form>
+
+                <form action=" {{ route('profiles.index') }} " method="GET">
+                @csrf
+                <input type='hidden' name="gender" value="woman">
+                <input type='submit' class="dropdown-item" value="女性のみ">
+                </form>
+                 </ul>
+</div>
+<a href=" {{ route('favorites.index') }} " class="btn btn-warning">お気に入り</a>
+<!-- <div class="btn btn-warning">お気に入り</div> -->
                 </div>
 
                 <div class="card-body">
@@ -47,8 +75,10 @@
                     </div>
                         <div class="row m-auto justify-content-center ">
                             @foreach ($profiles as $index => $profile)
-                            
-                            <div class="card card-member m-1 col-5 col-md-3 col-lg-2" style="width: 18rem;">
+                            <div class="card card-member m-1 col-5 col-md-3 col-lg-2 
+                            <?php if ($profile->gender === 0) echo 'card-man'; ?>
+                            <?php if ($profile->gender === 1) echo 'card-woman'; ?>
+                            " style="width: 18rem;">
                                 <div class="card-body d-relative">
                                     <h5 class="card-title">{{$profile->nickname}}</h5>
                                     <a href="{{ route('profiles.show',['profile' => $profile->id]) }}" class="card-link my-2 btn btn-sm btn-primary d-block d-absolute">詳細</a>
@@ -69,10 +99,10 @@
                     
 @endforeach
 
-{{$profiles->links()}}
-                        </div>
+</div>
 
-                     </div>
+</div>
+{{$profiles->links()}}
                 </div>
             </div>
         </div>
