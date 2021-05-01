@@ -3,6 +3,7 @@
 @section('content')
 
 <div class="message-box">
+  <div id="message-inner">
 @foreach($messages as $message)
 
 <?php if ($message->to_fav === $profile->id):  ?>
@@ -16,6 +17,7 @@
 
 @endforeach
 </div>
+</div>
 
 
 <form class="message-form" method="POST" action="{{ route('message.store')}}">
@@ -26,4 +28,5 @@
   <input type="hidden" value=" {{$profile->id}} " name="to_fav">
 </div>
 </form>
+<script src="{{ asset('/js/message.js') }}"></script>
 @endsection 

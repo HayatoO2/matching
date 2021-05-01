@@ -18,7 +18,6 @@ class messageController extends Controller
         $id = $query['profile'];
         $profile = Profile::find($id);
         $user = Auth::user();
-
         $messages = DB::table('messages')
                     ->where("to_fav", $profile->id)
                     ->where('from_fav', $user->profile->id)
@@ -39,6 +38,6 @@ class messageController extends Controller
         
         $profile = Profile::find($message->to_fav);
         $message->save();
-        return view('message.create', compact('profile'));
+        return redirect()->route('message.create', ['profile' => $profile->id]);
     }
 }
