@@ -19,11 +19,11 @@ Auth::routes();
 
 Route::get('/home', 'ProfileController@create')->name('home');
 
-Route::resource('profiles','profileController')->only([
+Route::resource('profiles','ProfileController')->only([
     'index', 'create', 'store', 'edit', 'show', 'update'
 ]);
-Route::get('search','profileController@search')->name('profiles.search');
+Route::get('search','ProfileController@search')->name('profiles.search');
 
-Route::resource('favorites','favoriteController')->only(['store', 'index', 'destroy']);
+Route::resource('favorites','FavoriteController')->only(['store', 'index', 'destroy']);
 
-Route::resource('message', 'messageController')->only('create', 'store');
+Route::resource('message', 'MessageController')->only('create', 'store');
