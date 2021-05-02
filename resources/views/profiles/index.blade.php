@@ -82,7 +82,9 @@
                                 <div class="card-body d-relative">
                                     <h5 class="card-title">{{$profile->nickname}}</h5>
                                     <a href="{{ route('profiles.show',['profile' => $profile->id]) }}" class="card-link my-2 btn btn-sm btn-primary d-block d-absolute">詳細</a>
+                                    @if (!empty($profile->age))
                                     年齢：{{$profile->age}}  <br>
+                                    @endif
                                     性別：
                                     @if ($profile->gender == 0)
                                     男性
@@ -90,9 +92,17 @@
                                     女性
                                     @endif
                                     <br>
+                                    @if (!empty($profile->height))
                                     身長：{{$profile->height}}<br>
+                                    @endif
+
+                                    @if (!empty($profile->interest))
                                     趣味：{{$profile->interest}}<br>
+                                    @endif
+
+                                    @if (!empty($profile->work))
                                     仕事：{{$profile->work}}<br>
+                                    @endif
                                     
                                 </div>
                             </div>

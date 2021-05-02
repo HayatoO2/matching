@@ -53,7 +53,12 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->profile->nickname }} <span class="caret"></span>
+                                    <?php if (!empty(Auth::user()->profile) ): ?>
+                                    {{ Auth::user()->profile->nickname }} 
+                                    <?php else: ?>
+                                    名無し
+                                    <?php endif ?>
+                                    <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
