@@ -77,4 +77,9 @@ class FavoriteController extends Controller
         return redirect('favorites');
         
     }
+    public function destroy($id){
+        $favorite = Favorite::find($id);
+        $favorite->delete();
+        return redirect('favorites');
+    }
 }
