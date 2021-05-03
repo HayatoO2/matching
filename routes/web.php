@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'ProfileController@create')->name('home');
 
-Route::resource('profiles','profileController')->only([
+Route::resource('profiles','ProfileController')->only([
     'index', 'create', 'store', 'edit', 'show', 'update'
 ]);
 Route::get('search','ProfileController@search')->name('profiles.search');
